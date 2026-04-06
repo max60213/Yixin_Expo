@@ -9,8 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useLocale } from '@/i18n/navigation';
-import { requireAuth } from '@/lib/auth';
+import { useLocale } from '@/locales';
 
 const Home = () => {
   const { t } = useLocale();

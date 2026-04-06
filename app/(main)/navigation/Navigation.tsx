@@ -1,66 +1,46 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  NativeSyntheticEvent,
+  TextInputSubmitEditingEventData,
 } from 'react-native';
-import { Link, useRouter, usePathname } from '@/i18n/navigation';
+import { useRouter } from 'expo-router';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Navigation = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const { pathname } = usePathname();
   const [searchHref, setSearchHref] = useState('/search');
   const searchFieldRef = useRef<TextInput>(null);
-  const searchLinkRef = useRef<Link>(null);
+  const router = useRouter();
 
-  useEffect(() => {
-     const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
+  const handleSearchClick = () => {
+    if (!isSearchFocused) {
+      setIsSearchFocused(true);
+      searchFieldRef.current?.focus();
+    }
+  };
 
-      if (isSearchFocused) {
-        if (target.closest('.navigation') === null) {
-          setIsSearchFocused(false);
-          }
-         }
-       };
+  const handleSearchSubmit = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+    e.preventDefault();
 
-      if (isSearchFocused) {
-         document.addEventListener("click", handleClickOutside);
-         return () => {
-           document.removeEventListener("click", handleClickOutside);
-           };
-         }
-      }, [isSearchFocused]);
+    if (!isSearchFocused) return;
 
-   const handleSearchClick = () => {
-     if (!isSearchFocused) {
-       setIsSearchFocused(true);
-       searchFieldRef.current?.focus();
-        }
-     };
+    const query = searchFieldRef.current?.props.value?.trim() ?? '';
+    const href = query ? `/search?q=${encodeURIComponent(query)}` : '/search';
+    setSearchHref(href);
 
-     const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-
-      if (!isSearchFocused) return;
-
-      const query = searchFieldRef.current?.value?.trim();
-      const href = query ? `/search?q=${encodeURIComponent(query)}` : '/search';
-      setSearchHref(href);
-
-      setTimeout(() => {
-         searchLinkRef.current?.navigate(href);
-       }, 0);
-     };
+    router.push(href);
+  };
 
   return (
      <View style={{
-        position: 'fixed',
+        position: 'absolute' as const,
         bottom: 0,
         left: 0,
         right: 0,
@@ -86,28 +66,21 @@ const Navigation = () => {
                 fontSize: 16,
                 padding: 12,
                  }}
-                />
-                  <TouchableOpacity
-                 style={{ padding: 8 }}
-                 onPress={handleSearchClick}
-                  >
-                   <MaterialIcons
-                     name={isSearchFocused ? 'close' : 'search'}
-                     size={24}
-                     color={isSearchFocused ? '#007AFF' : '#999'}
-                      />
-                   </TouchableOpacity>
-                   </View>
-                    <Link
-                  ref={searchLinkRef}
-                  href={searchHref}
-                  style={{ display: 'none' }}
-                  tabIndex={-1}
-                  aria-hidden="true"
-                  />
-                   </KeyboardAvoidingView>
+                 />
+                   <TouchableOpacity
+                  style={{ padding: 8 }}
+                  onPress={handleSearchClick}
+                   >
+                    <MaterialIcons
+                      name={isSearchFocused ? 'close' : 'search'}
+                      size={24}
+                      color={isSearchFocused ? '#007AFF' : '#999'}
+                       />
+                    </TouchableOpacity>
                     </View>
-                    );
-                  };
+                    </KeyboardAvoidingView>
+                     </View>
+                     );
+                   };
 
 export default Navigation;

@@ -9,12 +9,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { LocaleProvider, useLocale } from '@/locales';
-import { requireAuth } from '@/lib/auth';
 
 export default function SignupPage() {
   const router = useRouter();
-  const { t } = useLocale();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -45,94 +42,94 @@ export default function SignupPage() {
      <View style={{ flex: 1, backgroundColor: '#fff', paddingTop: 60 }}>
       <View style={{ paddingHorizontal: 24 }}>
         <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 8 }}>
-            {t('Auth.signupTitle') || 'Create Account'}
-           </Text>
-            <Text style={{ fontSize: 16, color: '#666', marginBottom: 32 }}>
-             {t('Auth.signupSubtitle') || 'Sign up to get started'}
-            </Text>
-
-            <View style={{ marginBottom: 20 }}>
-              <TextInput
-             style={{
-               height: 50,
-               backgroundColor: '#f5f5f5',
-               borderRadius: 12,
-               paddingHorizontal: 16,
-               fontSize: 16,
-               borderWidth: 1,
-               borderColor: '#ddd',
-                 }}
-              placeholder={t('Auth.namePlaceholder') || 'Name'}
-              value={name}
-              onChangeText={setName}
-                />
-             </View>
+            Create Account
+        </Text>
+             <Text style={{ fontSize: 16, color: '#666', marginBottom: 32 }}>
+              Sign up to get started
+             </Text>
 
              <View style={{ marginBottom: 20 }}>
                <TextInput
-             style={{
-               height: 50,
-               backgroundColor: '#f5f5f5',
-               borderRadius: 12,
-               paddingHorizontal: 16,
-               fontSize: 16,
-               borderWidth: 1,
-               borderColor: '#ddd',
-                 }}
-              placeholder={t('Auth.emailPlaceholder') || 'Email'}
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              autoCapitalize="none"
+              style={{
+                height: 50,
+                backgroundColor: '#f5f5f5',
+                borderRadius: 12,
+                paddingHorizontal: 16,
+                fontSize: 16,
+                borderWidth: 1,
+                borderColor: '#ddd',
+                  }}
+               placeholder="Name"
+               value={name}
+               onChangeText={setName}
                  />
-             </View>
+              </View>
 
-             <View style={{ marginBottom: 32 }}>
-               <TextInput
+              <View style={{ marginBottom: 20 }}>
+                <TextInput
+              style={{
+                height: 50,
+                backgroundColor: '#f5f5f5',
+                borderRadius: 12,
+                paddingHorizontal: 16,
+                fontSize: 16,
+                borderWidth: 1,
+                borderColor: '#ddd',
+                  }}
+               placeholder="Email"
+               value={email}
+               onChangeText={setEmail}
+               keyboardType="email-address"
+               autoCapitalize="none"
+                  />
+              </View>
+
+              <View style={{ marginBottom: 32 }}>
+                <TextInput
+              style={{
+                height: 50,
+                backgroundColor: '#f5f5f5',
+                borderRadius: 12,
+                paddingHorizontal: 16,
+                fontSize: 16,
+                borderWidth: 1,
+                borderColor: '#ddd',
+                  }}
+               placeholder="Password"
+               value={password}
+               onChangeText={setPassword}
+               secureTextEntry
+                 />
+              </View>
+
+             <TouchableOpacity
              style={{
                height: 50,
-               backgroundColor: '#f5f5f5',
+               backgroundColor: '#007AFF',
                borderRadius: 12,
-               paddingHorizontal: 16,
-               fontSize: 16,
-               borderWidth: 1,
-               borderColor: '#ddd',
+               justifyContent: 'center',
+               alignItems: 'center',
                  }}
-              placeholder={t('Auth.passwordPlaceholder') || 'Password'}
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-                />
-             </View>
-
-            <TouchableOpacity
-            style={{
-              height: 50,
-              backgroundColor: '#007AFF',
-              borderRadius: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-                }}
-            onPress={handleSubmit}
-             disabled={loading}
-                 >
-                 {loading ? (
-                   <ActivityIndicator color="#fff" />
-                 ) : (
-                   <Text style={{ fontSize: 16, fontWeight: '600', color: '#fff' }}>
-                     {t('Auth.signUp') || 'Sign Up'}
-                   </Text>
-                 )}
-            </TouchableOpacity>
-
-            <TouchableOpacity
-            style={{ marginTop: 24, alignItems: 'center' }}
-            onPress={() => router.push('/(auth)/auth/login')}
-                 >
-               <Text style={{ color: '#007AFF', fontSize: 16 }}>
-                 {t('Auth.haveAccount') || 'Already have an account? Sign in'}
-               </Text>
+             onPress={handleSubmit}
+              disabled={loading}
+                  >
+                  {loading ? (
+                    <ActivityIndicator color="#fff" />
+                  ) : (
+                    <Text style={{ fontSize: 16, fontWeight: '600', color: '#fff' }}>
+                      Sign Up
+                    </Text>
+                  )}
              </TouchableOpacity>
+
+             <TouchableOpacity
+             style={{ marginTop: 24, alignItems: 'center' }}
+             onPress={() => router.push('/(auth)/auth/login')}
+                  >
+                <Text style={{ color: '#007AFF', fontSize: 16 }}>
+                  Already have an account? Sign in
+                </Text>
+              </TouchableOpacity>
             </View>
            </View>
            );
