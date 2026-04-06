@@ -1,43 +1,37 @@
 'use client';
 
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Link } from '@/i18n/navigation';
+import { View, Text } from 'react-native';
+import { useRouter } from 'expo-router';
 
-const Yixin_avatar = () => (
-   <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: '#f0f0f0', justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 20 }}>🎨</Text>
-      </View>
-    );
+const YixinAvatar = () => (
+  <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: '#f0f0f0', justifyContent: 'center', alignItems: 'center' }}>
+    <Text style={{ fontSize: 20 }}>🎨</Text>
+  </View>
+);
 
 const AccountMenu = () => (
-   <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: '#f0f0f0', justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 20 }}>👤</Text>
-    </View>
+  <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: '#f0f0f0', justifyContent: 'center', alignItems: 'center' }}>
+    <Text style={{ fontSize: 20 }}>👤</Text>
+  </View>
 );
 
 export default function AppBar() {
-  const mdDown = window.innerWidth < 768;
+  const router = useRouter();
+  const mdDown = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
-     <SafeAreaView style={{ paddingTop: 60, backgroundColor: '#fff' }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 16 }}>
-          <Link href="/">
-             {mdDown ? (
-                <View style={{ width: 120, height: 30, justifyContent: 'center' }}>
-                  <Text style={{ fontSize: 18 }}>Yixin</Text>
-                 </View>
-              ) : (
-                <View style={{ width: 40, height: 40 }}>
-                  <Yixin_avatar />
-                 </View>
-               )}
-              </Link>
-              <TouchableOpacity style={{ width: 40, height: 40 }}>
-                <AccountMenu />
-              </TouchableOpacity>
-            </View>
-           </SafeAreaView>
-         );
+     <View style={{ padding: 16, paddingTop: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+       <View onPress={() => router.push('/(main)/(tabs)/index')} style={{ width: mdDown ? 120 : 40, height: 40, justifyContent: 'center' }}>
+         {mdDown ? (
+           <Text style={{ fontSize: 18 }}>Yixin</Text>
+         ) : (
+           <YixinAvatar />
+         )}
+       </View>
+       <View style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center' }}>
+         <AccountMenu />
+       </View>
+       </View>
+     );
 }

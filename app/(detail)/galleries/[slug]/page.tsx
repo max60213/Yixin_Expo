@@ -10,13 +10,13 @@ const GalleriesDetail = () => {
   return (
      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff', padding: 16, paddingTop: 60 }}>
        <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 24 }}>
-          Gallery Profile
-        </Text>
-        <Test style={{ color: '#666' }}>
-          {slug || 'Gallery #123'}
-        </Text>
-       </SafeAreaView>
-     );
+         Gallery Profile
+       </Text>
+       <Text style={{ color: '#666' }}>
+         {slug || 'Gallery #123'}
+       </Text>
+     </SafeAreaView>
+   );
 };
 
 export default GalleriesDetail;

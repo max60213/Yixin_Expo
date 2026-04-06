@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
        } catch (error) {
         console.error('Failed to load user:', error);
          }
-       };
+        };
 
     const login = async (email: string, password: string) => {
       try {
@@ -54,31 +54,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setIsAuthenticated(true);
             } else {
              throw new Error('Invalid credentials');
-              }
-            } catch (error) {
+               }
+              } catch (error) {
           console.error('Login error:', error);
-            }
-          };
+              }
+            };
 
       const signup = async (email: string, password: string, name: string) => {
-         try {
-           const response = await fetch('https://studio.yixin.art/api/signup', {
-             method: 'POST',
-             headers: { 'Content-Type': 'application/json' },
-             body: JSON.stringify({ email, password, name }),
-              });
-             if (response.ok) {
-               const data = await response.json();
-               setUser(data.user);
-               await SecureStore.setItemAsync('user', JSON.stringify(data.user));
-               setIsAuthenticated(true);
+        try {
+          const response = await fetch('https://studio.yixin.art/api/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, name }),
+            });
+            if (response.ok) {
+              const data = await response.json();
+              setUser(data.user);
+              await SecureStore.setItemAsync('user', JSON.stringify(data.user));
+              setIsAuthenticated(true);
                  } else {
                    throw new Error('Signup failed');
                      }
-                   } catch (error) {
-                 console.error('Signup error:', error);
-                   }
-                 };
+                    } catch (error) {
+                console.error('Signup error:', error);
+                    }
+                  };
 
             const logout = async () => {
              try {
@@ -88,13 +88,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                  } catch (error) {
                console.error('Logout error:', error);
                  }
-               };
+                };
 
     return (
        <AuthContext.Provider value={{ user, isAuthenticated, login, signup, logout }}>
           {children}
          </AuthContext.Provider>
-      );
+       );
 }
 
 export function useAuth() {

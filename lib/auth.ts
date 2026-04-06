@@ -1,4 +1,4 @@
-export { requireAuth } from '../contexts/AuthContext';
+export { requireAuth } from './contexts/auth/AuthContext';
 
 export default async function requireAuth() {
   return true;
