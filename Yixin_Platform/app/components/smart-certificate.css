@@ -1,0 +1,132 @@
+@import "../breakpoints.css";
+
+@layer components {
+  .smart-certificate {
+    .swiper {
+      overflow: visible !important;
+      width: calc(130px + 40%);
+      max-width: 800px;
+
+      &-slide {
+        height: auto;
+        background-color: white;
+        position: relative;
+        transition-property: transform, box-shadow, scale, opacity !important;
+        transition: scale var(--transition-card-float), opacity var(--transition-card-float);
+        will-change: scale, opacity;
+
+        img{
+          box-shadow: var(--card-lay);
+          will-change: box-shadow;
+          transition: box-shadow var(--transition-card-float);
+        }
+
+        &>div {
+          height: 100%;
+        }
+
+        /* Quote icon */
+        .quote-icon {
+          position: absolute;
+          top: -20px;
+          right: 4px;
+          scale: 0.7;
+          opacity: 0;
+          transition: opacity var(--transition-card-float), translate var(--transition-card-float);
+          will-change: opacity, translate;
+
+          @mixin md-up {
+            right: 32px;
+            scale: 1;
+          }
+        }
+
+        /* Active state */
+        &-active {
+          scale: 1.02;
+          transition-delay: 0.2s;
+          img{
+            box-shadow: var(--card-float);
+          }
+
+          .quote-icon {
+            opacity: 0.6;
+            translate: 0 -30px;
+            transition-delay: 0.4s;
+          }
+        }
+
+        /* Inactive slides */
+        &:not(.swiper-slide-active) {
+          opacity: 0.5;
+        }
+      }
+
+      &-pagination-bullet {
+        position: relative !important;
+        opacity: 1 !important;
+        --bullet-size: 36px;
+        width: var(--bullet-size) !important;
+        height: var(--bullet-size) !important;
+        background-color: transparent !important;
+        margin: 0 -3px !important;
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          background-color: hsl(0, 0%, 80%);
+          border-radius: 100%;
+          transition: background-color var(--transition-normal);
+        }
+
+        &-active {
+          &:before {
+            background-color: hsl(0, 0%, 20%);
+          }
+        }
+
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          border: 2px solid rgba(0, 0, 0, 0.4);
+          border-radius: 100%;
+          transition: width var(--transition-normal), height var(--transition-normal);
+          z-index: -1;
+        }
+
+        &:hover,
+        &-active {
+          &:after {
+            transform-origin: center;
+            width: var(--bullet-size);
+            height: var(--bullet-size);
+          }
+        }
+      }
+    }
+
+    .company-image {
+      img {
+        width: 250px;
+        height: 80px;
+        object-fit: contain;
+        transform: translate(10%, 10%);
+      }
+    }
+
+    .avatar{
+      outline: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+}

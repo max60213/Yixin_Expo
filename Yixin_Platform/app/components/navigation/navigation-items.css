@@ -1,0 +1,41 @@
+@import "../../breakpoints.css";
+
+.navigation__items__tabs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  li {
+    opacity: 1;
+    transition: all var(--nav-ease-time) var(--nav-ease);
+    transition-property: opacity;
+  }
+
+  .search-field {
+    pointer-events: none;
+  }
+}
+
+.navigation__items__pad {
+  position: absolute;
+  height: var(--tab-height);
+  background: var(--tab-active);
+  border-radius: 100px;
+  z-index: -1;
+  box-shadow: 0 0 0 0px var(--tab-active), 0 0px 0px rgba(0, 0, 0, 0.2);
+  transition: var(--tab-transition);
+  transition-duration: 0.4s;
+  transition-timing-function: var(--tab-hover-ease);
+  transition-property: background-color, outline, box-shadow, opacity;
+}
+
+/* Search mode styles */
+.search-mode .navigation__items__pad {
+  opacity: 0;
+}
+
+.search-mode .navigation__items__tabs li {
+  opacity: 0;
+}

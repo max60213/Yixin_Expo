@@ -1,0 +1,18 @@
+@import '../../../../breakpoints.css';
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  min-height: 23px;
+  width: 100%;
+
+  &__label {
+    flex: 2;
+    color: var(--color-text-primary);
+  }
+
+  &__value {
+    flex: 3;
+    color: var(--color-text-secondary);
+  }
+}

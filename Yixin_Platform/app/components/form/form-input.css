@@ -1,0 +1,149 @@
+:root {
+  --color-primary: #005ca2;
+  --color-divider: hsla(0, 0%, 0%, 0.12);
+  --transition-normal: 0.3s ease-in-out;
+  --transition-steep: 0.3s cubic-bezier(.15, 0, .15, 1);
+}
+
+@layer components {
+  .form-input-wrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-input {
+    overflow: visible !important;
+    padding: 18px 0 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    transition: border-color var(--transition-normal);
+    position: relative;
+    background: transparent;
+
+    &:focus-within {
+      border-bottom-color: var(--color-primary);
+    }
+
+    &__placeholder {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      color: var(--color-text-secondary);
+      pointer-events: none;
+      transform-origin: left top;
+      transition: all var(--transition-steep);
+      font-size: clamp(0.875rem, 0.75rem + 0.3333vw, 1.125rem);
+      font-weight: 400;
+      line-height: 1.6;
+      z-index: 1;
+    }
+
+    &__field {
+      font-size: clamp(0.875rem, 0.75rem + 0.3333vw, 1.125rem);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      overflow: visible !important;
+      padding: 0;
+      transition: color var(--transition-normal) 20s;
+      position: relative;
+      z-index: 2;
+
+      /* 當 input focus 時，讓 placeholder 移到上面 */
+      &:focus {
+        ~.form-input__placeholder {
+          color: var(--color-primary);
+          transform: translateY(-130%) scale(0.85);
+        }
+      }
+
+      &:disabled {
+        color: rgba(0, 0, 0, 0.4);
+        cursor: not-allowed;
+      }
+
+      /* 自動填充樣式 */
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+        -webkit-text-fill-color: var(--color-body);
+        transition: background-color 5000s ease-in-out 0s;
+      }
+    }
+
+    /* 當有值時，保持 placeholder 在上面 */
+    &--has-value {
+      .form-input__placeholder {
+        color: var(--color-text-secondary);
+        transform: translateY(-130%) scale(0.85);
+      }
+    }
+
+    /* focus 且有值時的 placeholder 顏色 */
+    &:focus-within.form-input--has-value {
+      .form-input__placeholder {
+        color: var(--color-primary);
+      }
+    }
+
+    &--disabled {
+      border-bottom-color: rgba(0, 0, 0, 0.1);
+
+      &:focus-within {
+        border-bottom-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .form-input__placeholder {
+        color: rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    &--error {
+      border-bottom-color: #dc2626;
+
+      &:focus-within {
+        border-bottom-color: #dc2626;
+      }
+
+      .form-input__placeholder {
+        color: #dc2626;
+      }
+
+      .form-input__field {
+        color: #dc2626;
+      }
+    }
+
+    &--success {
+      border-bottom-color: #16a34a;
+
+      &:focus-within {
+        border-bottom-color: #16a34a;
+      }
+
+      .form-input__placeholder {
+        color: #16a34a;
+      }
+    }
+  }
+
+  .form-input__error {
+    margin-top: 0.5rem;
+    color: #dc2626;
+    font-size: clamp(0.875rem, 0.75rem + 0.3333vw, 1.125rem);
+    line-height: 1.6;
+
+    &-list {
+      list-style: disc;
+      padding-left: 1.2rem;
+      margin: 0;
+
+      li {
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+}

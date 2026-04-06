@@ -1,0 +1,152 @@
+.info-card {
+  background: #ffffff;
+
+  padding: 17px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+
+  &__header {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* 展期卡片的 content 使用 row 布局 */
+  &--duration &__content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  /* 其他卡片的 content 使用 column 布局 */
+  &--location &__content,
+  &--time &__content,
+  &--price &__content {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  &__text {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 0;
+    background: rgba(0, 0, 0, 0.05);
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.8);
+    transition: background 0.2s;
+    flex: 1;
+    flex-direction: column;
+    gap: 1px;
+
+    p {
+      font-family: var(--font-noto-sans-tc);
+    }
+
+    .material-symbols-rounded {
+      font-size: 20px;
+      color: var(--color-text-secondary);
+      font-variation-settings:
+        'FILL' 1,
+        'wght' 300,
+        'GRAD' 0,
+        'opsz' 20;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    &.button--ticket {
+      flex-direction: row;
+      gap: 6px;
+      background: var(--color-primary);
+      color: white;
+
+      .material-symbols-rounded {
+        color: white;
+      }
+    }
+  }
+
+  &__hours {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__hour-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+  }
+
+  &__pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3px;
+  }
+
+  &__note {
+    display: flex;
+    align-items: start;
+    gap: 3px;
+    font-size: 14px;
+    font-weight: 400;
+
+    p {
+      color: var(--color-text-tertiary);
+      font-family: var(--font-noto-sans-tc);
+    }
+
+    .material-symbols-rounded {
+      margin-top: 0.15em;
+      font-size: 18px;
+      color: var(--color-text-tertiary);
+      font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 20;
+    }
+
+    &:has(~.info-card__button) {
+      margin-bottom: 3px;
+    }
+  }
+}

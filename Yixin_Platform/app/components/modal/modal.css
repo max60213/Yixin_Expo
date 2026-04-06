@@ -1,0 +1,67 @@
+@import "../../breakpoints.css";
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  transition-delay: 0.2s;
+
+  @mixin md-down{
+    padding: 10px;
+  }
+
+
+  &--open {
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  &__content {
+    position: relative;
+    overflow-y: visible;
+    opacity: 0;
+    margin: auto 0;
+    height: fit-content;
+    transform: translateY(100px);
+    transition: transform, opacity;
+    transition-delay: 0.2s;
+    transition-timing-function: ease;
+    transition-duration: 0.3s;
+    width: 600px;
+    max-width: 90vw;
+    gap: 20px;
+    padding: 24px 32px;
+    background: #FFFFFF;
+
+    @mixin md-down{
+      padding: 20px;
+    }
+
+    .modal--open & {
+      opacity: 1;
+      transform: translateY(0);
+      transition-timing-function: cubic-bezier(0, 0, 0, 1);
+    }
+  }
+  &__close-button {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    left: 100%;
+    transform: translateX(-100%);
+  }
+}

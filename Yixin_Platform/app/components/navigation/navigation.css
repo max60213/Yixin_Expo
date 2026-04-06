@@ -1,0 +1,163 @@
+@import "../../breakpoints.css";
+
+:root {
+  --tab-hover-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --tab-height: 36px;
+  --tab-active: white;
+  --tab-hover: rgba(255, 255, 255, 0.6);
+  --nav-background: hsla(0, 0%, 90%, 0.8);
+  --tab-transition: all 0.3s ease-in-out;
+  --tab-hover-ease: cubic-bezier(0.33, 0, 0.33, 1);
+  --nav-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --nav-ease-time: 0.6s;
+  --backdrop-blur: 10px;
+  --nav-dropshadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+
+  @mixin md-down {
+    --tab-height: 54px;
+  }
+}
+
+.navigation {
+  height: var(--nav-height);
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @mixin md-down {
+    height: auto;
+    position: fixed;
+    bottom: calc(4px + env(safe-area-inset-bottom));
+    top: unset;
+  }
+
+  @media (display-mode: fullscreen) {
+    bottom: 22px;
+  }
+
+  &__container {
+    position: relative;
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all var(--nav-ease-time) var(--nav-ease);
+    transition-property: transform, height;
+
+    @mixin md-down {
+      margin: 0 10px;
+    }
+  }
+
+  &__back-button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    height: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+    aspect-ratio: 1;
+    display: flex;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 0px;
+    backdrop-filter: blur(var(--backdrop-blur));
+    transition-property: height, margin-right, opacity, background-color;
+    transition-duration: calc(var(--nav-ease-time) * 0.8),
+      calc(var(--nav-ease-time) * 0.8), calc(var(--nav-ease-time) * 0.8), 0.3s;
+    transition-timing-function: var(--nav-ease);
+    filter: drop-shadow(var(--nav-dropshadow));
+  }
+
+  &__items {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--nav-background);
+    filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+    border-radius: 100px;
+    padding: 4px;
+    width: 100%;
+    backdrop-filter: blur(var(--backdrop-blur));
+    transition: all var(--nav-ease-time) var(--nav-ease);
+    transition-property: filter, background-color, width;
+  }
+}
+
+.search-field {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 4px;
+  border-radius: 100px;
+  transition: all var(--nav-ease-time) var(--nav-ease);
+  transition-property: opacity;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  input {
+    padding-inline-start: 18px;
+    width: 100%;
+    inset: 0;
+    height: 100%;
+    border-radius: 100px;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  @mixin md-up {
+    input {
+      padding-bottom: 1px;
+      &::placeholder {
+        transform: translateY(2px);
+      }
+    }
+  }
+  .clear {
+    position: absolute;
+    right: 60px;
+    cursor: pointer;
+  }
+}
+
+.search-mode {
+  @mixin md-up {
+    transform: translate(-15px, var(--nav-height));
+  }
+
+  .navigation {
+    &__back-button {
+      height: 60px;
+      margin-right: 8px;
+      opacity: 1;
+      &:hover {
+        background-color: white;
+      }
+    }
+
+    &__items {
+      filter: drop-shadow(var(--nav-dropshadow));
+      background-color: rgba(255, 255, 255, 0.8);
+
+      @mixin md-down {
+        width: 100%;
+      }
+
+      &__search {
+        height: calc(60px - 4px * 2);
+      }
+
+      .search-field {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
+}

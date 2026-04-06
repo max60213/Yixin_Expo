@@ -1,0 +1,218 @@
+@import "../breakpoints.css";
+
+:root {
+  --carousel-row-gap: 20px;
+}
+
+@keyframes carousel-progress {
+  from {
+    right: 100%;
+  }
+
+  to {
+    right: 0;
+  }
+}
+
+.swiper-3d {
+  transform: perspective(900px);
+  perspective: 900px;
+
+  @mixin 2xl-up {
+    transform: perspective(90vw);
+    perspective: 90vw;
+  }
+}
+
+.carousel {
+  margin-bottom: 36px;
+  padding-top: 30px;
+  margin-top: -30px;
+  overflow: hidden;
+
+  .carousel-wrapper {
+    max-width: 2000px;
+    margin: 0 auto;
+  }
+
+  /* 共用 Swiper 樣式 */
+  .swiper {
+    overflow: visible !important;
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--carousel-row-gap);
+
+    @mixin md-down {
+      row-gap: 12px;
+    }
+  }
+}
+
+/* 圖片 Slider 專用樣式 */
+.carousel-image-swiper {
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
+
+  .swiper-slide {
+    width: calc(var(--grid-col) * 8 + var(--grid-gap) * 7);
+
+    @mixin md-down {
+      width: 100%;
+    }
+  }
+
+  .swiper-slide {
+    transition: opacity 1s ease, filter 1s ease, transform 1s ease,
+      transform-origin 1s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+
+    &:not(&-active) {
+      opacity: 0.3;
+      filter: saturate(0);
+    }
+
+    @mixin md-up {
+      &-prev {
+        transform-origin: center right;
+        transform: translateX(calc(var(--grid-gap) * -1))
+          translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(20deg) scale(1) !important;
+      }
+
+      &:has(+ .swiper-slide-prev) {
+        transform-origin: center right;
+        opacity: 0.15;
+      }
+
+      &:has(+ * + .swiper-slide-prev) {
+        opacity: 0;
+      }
+
+      &-next {
+        transform-origin: center left;
+        transform: translateX(calc(var(--grid-gap) * 1))
+          translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(-20deg) scale(1) !important;
+
+        & ~ .swiper-slide {
+          transform-origin: center left;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+/* 標題 Slider 專用樣式 */
+.carousel-title-swiper {
+  margin-top: calc(var(--carousel-row-gap) * 1.2);
+  width: calc(var(--grid-col) * 4 + var(--grid-gap) * 3);
+
+  @mixin md-down {
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .swiper-pagination {
+    all: unset;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    z-index: 1;
+
+    &-bullet {
+      width: 20px;
+      height: 3px;
+      border-radius: 0;
+      margin: 0 !important;
+      transition: width 0.3s ease, background-color 0.3s ease;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0.12);
+      opacity: unset;
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: calc(100% + 10px);
+        height: 20px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+      }
+
+      &:hover:not(&-active) {
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      &:after {
+        content: "";
+        left: 0;
+        right: 0%;
+        position: absolute;
+        height: 100%;
+        background-color: var(--color-primary);
+        opacity: 0;
+        transition: right 0.3s ease, opacity 0.3s ease;
+      }
+
+      &-active {
+        width: 100px;
+
+        &:after {
+          right: 0%;
+          opacity: 1;
+          animation: carousel-progress 6s linear;
+        }
+      }
+
+      &-active:nth-child(1) {
+        &:after {
+          animation: carousel-progress 5s linear;
+        }
+      }
+    }
+
+    @mixin md-down {
+      &-bullet {
+        width: 16px;
+
+        &-active {
+          width: 80px;
+        }
+      }
+    }
+  }
+
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+
+    /* 非 active 的標題樣式 */
+    &:not(&-active) {
+      opacity: 0;
+    }
+  }
+
+  .carousel-title-slide {
+    text-align: center;
+    margin: 0;
+    color: var(--color-text-primary);
+    width: max-content;
+    text-wrap: pretty;
+
+    @mixin md-down {
+      max-width: 100vw;
+      padding: 0 var(--grid-padding);
+    }
+
+    @mixin md-up {
+      max-width: 60vw;
+    }
+
+    @mixin xl-up {
+      max-width: 50vw;
+    }
+  }
+}

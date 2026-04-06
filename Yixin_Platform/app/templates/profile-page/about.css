@@ -1,0 +1,174 @@
+@import "../../breakpoints.css";
+
+/* About Block */
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 var(--grid-padding);
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+
+    &__title {
+      font-family: "Noto Serif TC", serif;
+      font-weight: 600;
+      font-size: 25px;
+      line-height: 1.44em;
+      letter-spacing: 0.02em;
+      color: #000;
+      margin: 0;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    &__description {
+      font-family: "Noto Serif TC", serif;
+      font-weight: 400;
+      flex-shrink: 0;
+      letter-spacing: 0.03em;
+      margin: 0;
+      width: calc(var(--grid-col) * 7 + var(--grid-gap) * 6);
+      p, ul {
+        font-size: 16px;
+        line-height: 1.75em;
+        color: var(--color-text-secondary);
+      }
+      p {
+        margin-bottom: 1em;
+      }
+      ul {
+        list-style: disc;
+        padding-left: 1.2em;
+      }
+      ul + ul {
+        margin-top: 0.5em;
+      }
+      strong {
+        color: var(--color-text-primary);
+      }
+      h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0.5em;
+      }
+    }
+
+    &__info {
+      position: sticky;
+      top: var(--nav-height);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 0;
+      width: calc(var(--grid-col) * 4 + var(--grid-gap) * 3);
+
+      &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      &__label {
+        font-family: "Noto Serif TC", serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.44em;
+        letter-spacing: 0.03em;
+        color: rgba(0, 0, 0, 0.5);
+      }
+
+      &__value {
+        font-family: "Noto Serif TC", serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.44em;
+        letter-spacing: 0.03em;
+        color: #005ca2;
+
+        &--link {
+          font-family: "Times New Roman", serif;
+          text-decoration: none;
+          cursor: pointer;
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+
+    @mixin xl-down {
+      &__description {
+        width: 100%;
+        flex-shrink: 1;
+      }
+
+      &__info {
+        flex-shrink: 0;
+      }
+
+      gap: 48px;
+    }
+
+    @mixin lg-down {
+      flex-direction: column;
+
+      &__description {
+        width: 100%;
+      }
+
+      &__info {
+        position: relative;
+        top: 0;
+        width: 100%;
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @mixin md-down {
+      &__info {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
+
+/* Responsive Design */
+@mixin md-down {
+  .about {
+    &__info {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+}
+
+@mixin sm-down {
+  .about {
+    &__header {
+      &__title {
+        font-size: 20px;
+      }
+    }
+
+    &__description {
+      font-size: 14px;
+      line-height: 1.7em;
+    }
+
+    &__info-label {
+      font-size: 12px;
+    }
+
+    &__info-value {
+      font-size: 14px;
+    }
+  }
+}

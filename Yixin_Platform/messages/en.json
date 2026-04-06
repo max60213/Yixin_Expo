@@ -1,0 +1,31 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "explore": "Explore",
+    "auction": "Auction",
+    "more": {
+      "title": "More",
+      "about": "About",
+      "news": "News"
+    },
+    "Profile": "Profile"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, en {English} zh_TW {繁體中文} other {Unknown}}"
+  },
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "NewsPage": {
+    "title": "News"
+  },
+  "AboutPage": {
+    "title": "About"
+  },
+  "ArticlePage": {
+    "publishedOn": "Published on {date}",
+    "backToNews": "Back to News"
+  }
+}

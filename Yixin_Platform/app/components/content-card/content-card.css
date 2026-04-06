@@ -1,0 +1,318 @@
+@import "../../breakpoints.css";
+
+/* ============================================
+   基礎卡片樣式 (.card)
+   ============================================ */
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 10px;
+  transition: filter 0.3s ease;
+  height: fit-content;
+
+  @mixin md-down {
+    gap: 8px;
+  }
+
+  /* 預設禁用所有子元素的點擊 */
+  * {
+    pointer-events: none;
+  }
+
+  img {
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* Hover 效果 */
+  &:hover {
+    z-index: 1;
+
+    .card__click-area {
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.15) inset;
+      inset: calc(var(--grid-gap) * -0.5);
+
+      @mixin md-down {
+        inset: calc(var(--grid-gap) * -0.75);
+        /* background-color: red; */
+      }
+    }
+
+    img {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  /* ----- Elements ----- */
+
+  /* 背景可點擊區域 */
+  &__click-area {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transition-property: box-shadow, inset;
+  }
+
+  /* 圖片區域 */
+  &__image {
+    position: relative;
+    width: 100%;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  /* 內容區域 */
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @mixin md-down {
+      gap: 6px;
+    }
+
+    &__title,
+    &__header__title {
+      color: var(--color-text-primary);
+      font-size: 18px;
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+
+      @mixin md-down {
+        font-size: 16px;
+      }
+    }
+
+    &__prefix {
+      display: flex;
+      align-items: baseline;
+
+      a,
+      p,
+      span {
+        font-size: 15px;
+
+        @mixin md-down {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &__footer {
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.35;
+
+      @mixin md-down {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+/* ============================================
+   Event 卡片變體 (.card--event .card--insight)
+   ============================================ */
+.card--event,
+.card--insight {
+  .card {
+    &__image {
+      aspect-ratio: 2 / 1;
+    }
+
+    &__content {
+      &__prefix {
+        margin-top: 2px;
+        gap: 8px;
+
+        &__date {
+          font-size: 15px;
+
+          @mixin md-down {
+            font-size: 13px;
+          }
+
+          color: var(--color-text-secondary);
+        }
+      }
+
+      &__footer {
+        gap: 12px;
+
+        &__tag {
+          pointer-events: auto;
+          cursor: pointer;
+          font-size: 15px;
+          color: var(--color-text-tertiary);
+
+          &:hover {
+            color: var(--color-primary-hover);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ============================================
+   Artwork 卡片變體 (.card--artwork)
+   ============================================ */
+.card--artwork {
+  .card {
+    &__image {
+      background-color: hsla(0, 0%, 0%, 0.03);
+      aspect-ratio: 1 / 1;
+      transition: all 0.3s ease;
+      transition-property: background-color, filter;
+    }
+
+    &__content {
+      gap: 4px;
+
+      &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &__title {
+          width: 100%;
+        }
+
+        &__bookmark {
+          pointer-events: auto;
+          cursor: pointer;
+        }
+
+        .material-symbols-outlined {
+          color: var(--color-text-secondary);
+          font-variation-settings: "FILL" 0, "wght" 300;
+          transition: all 0.3s ease;
+          transition-property: font-variation-settings, color;
+
+          &:hover {
+            color: var(--color-primary);
+          }
+
+          &.active {
+            font-variation-settings: "FILL" 1, "wght" 300;
+            color: var(--color-primary);
+
+            &:hover {
+              color: var(--color-primary-hover);
+            }
+          }
+        }
+      }
+
+      &__footer {
+        @mixin md-down {
+          margin-top: -0.2em;
+        }
+
+        &__artist {
+          pointer-events: auto;
+          cursor: pointer;
+        }
+
+        &__year {
+          color: var(--color-text-secondary);
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .card__image {
+      background-color: transparent;
+    }
+  }
+}
+
+/* ============================================
+   Material / Artist / Gallery 共用變體
+   ============================================ */
+.card--material,
+.card--artist,
+.card--gallery {
+  min-width: 0;
+
+  .card {
+    &__image {
+      aspect-ratio: 1;
+    }
+
+    &__content {
+      gap: 4px;
+
+      &__footer {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+/* ----- Artist / Gallery 圓形頭像 ----- */
+.card--artist,
+.card--gallery {
+  .card {
+    &__image {
+      &:has(span .react-loading-skeleton) {
+        overflow: hidden;
+        border-radius: 50%;
+      }
+
+      img,
+      .react-loading-skeleton {
+        border-radius: 50%;
+        overflow: hidden;
+      }
+    }
+
+    &__content {
+      gap: 1px;
+      text-align: center;
+
+      &__footer {
+        justify-content: center;
+      }
+    }
+  }
+
+  @mixin md-down {
+    gap: 8px;
+  }
+}
+
+/* ============================================
+   Context-specific 覆寫
+   ============================================ */
+
+/* Scroller 容器內的 Artwork 卡片 */
+.scroller__container {
+  .card--artwork {
+    .card__image {
+      aspect-ratio: 1 / 1 !important;
+
+      img {
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+
+        &.landscape {
+          height: unset !important;
+        }
+
+        &.portrait {
+          width: unset !important;
+        }
+      }
+    }
+  }
+}

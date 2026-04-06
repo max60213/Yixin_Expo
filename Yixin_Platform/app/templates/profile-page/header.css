@@ -1,0 +1,160 @@
+@import "../../breakpoints.css";
+
+/* Profile Header Block */
+.profile-header {
+  position: relative;
+  margin: 0 var(--grid-padding);
+  padding: 32px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  @mixin lg-up {
+    margin: 0 calc(var(--grid-padding) + var(--grid-col) + var(--grid-gap));
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  &__avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__avatar--generated {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__name {
+      /* font-size: 48px; */
+      font-weight: 600;
+      line-height: 1.15em;
+      color: #000;
+      margin: 0;
+    }
+
+    &__location {
+      font-family: "Noto Sans TC", sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.45em;
+      color: rgba(0, 0, 0, 0.6);
+      margin: 0;
+    }
+  }
+
+  &__states {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+  }
+}
+
+/* Profile Stat Block */
+.profile-states {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 92px;
+
+  &__number {
+    font-family: "Times New Roman", serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.15em;
+    color: rgba(0, 0, 0, 0.87);
+    text-align: center;
+  }
+
+  &__label {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.6em;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+  }
+}
+
+/* Responsive Design */
+@mixin md-down {
+  .profile-header {
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    &__details {
+      &__name {
+        /* font-size: 40px; */
+        text-wrap: nowrap;
+      }
+
+      &__location {
+        font-size: 16px;
+      }
+    }
+
+    &__stats {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+
+  .profile-states {
+    &__number {
+      font-size: 36px;
+    }
+
+    &__label {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-header {
+    &__avatar {
+      width: 80px;
+      height: 80px;
+    }
+
+    &__details {
+      &__name {
+        /* font-size: 36px; */
+      }
+
+      &__location {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .profile-states {
+    width: 80px;
+
+    &__number {
+      font-size: 28px;
+    }
+  }
+}

@@ -1,0 +1,254 @@
+@import "tailwindcss";
+@import "./breakpoints.css";
+
+:root {
+  text-autospace: normal;
+  --background: #ffffff;
+  --foreground: #171717;
+  --shadow-side: 1px 1px 5px 0px rgba(0, 0, 0, 0.1),
+    6px 6px 8px 0px rgba(0, 0, 0, 0.09), 13px 13px 11px 0px rgba(0, 0, 0, 0.05),
+    24px 24px 14px 0px rgba(0, 0, 0, 0.01);
+}
+
+html[lang="ja"] {
+  word-break: auto-phrase;
+}
+
+@theme {
+  --breakpoint-sm: 500px;
+  --breakpoint-md: 800px;
+  --breakpoint-lg: 1100px;
+  --breakpoint-xl: 1400px;
+  --breakpoint-2xl: 1800px;
+  --color-primary: #005ca2;
+  --color-primary-hover: #008dfc;
+  --color-secondary: #e5f4ff;
+  --color-divider: hsla(0, 0%, 0%, 0.12);
+
+  /* 文字顏色層級 */
+  --color-text-primary: rgba(0, 0, 0, 0.87);
+  /* 標題、重要內容 */
+  --color-text-secondary: rgba(0, 0, 0, 0.6);
+  /* 內文 */
+  --color-text-tertiary: rgba(0, 0, 0, 0.38);
+  /* 說明文字、輔助資訊 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+* {
+  scroll-behavior: smooth;
+  font-family: "Heading Font", var(--font-noto-serif-tc), serif;
+}
+
+body {
+  padding-bottom: var(--nav-height);
+}
+
+.app-bar,
+.navigation-container {
+  transition: all 0.3s ease;
+  transition-property: opacity, height, padding;
+}
+
+/* 
+  中英文不同字重設定：
+  - 中文：Noto Serif TC 600（粗體）
+  - 英文：Times New Roman 400（正常體）
+  
+  方法：使用 @font-face 搭配 unicode-range，只針對英文字符設定 Times New Roman
+  中文會自動 fallback 到 Noto Serif TC 並使用 font-weight: 600
+*/
+
+/* 
+  針對英文字符，使用 Times New Roman Regular
+  Safari 需要為每個 font-weight 分別定義，才能避免自動匹配到 Bold 變體
+  使用 PostScript 名稱 "TimesNewRomanPSMT" 來明確指定 Regular 版本
+*/
+@font-face {
+  font-family: "Heading Font";
+  src: local("TimesNewRomanPSMT"), local("Times New Roman");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2018-2019, U+201C-201D,
+    U+2013-2014;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Heading Font";
+  src: local("TimesNewRomanPSMT"), local("Times New Roman");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2018-2019, U+201C-201D,
+    U+2013-2014;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Heading Font";
+  src: local("TimesNewRomanPSMT"), local("Times New Roman");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2018-2019, U+201C-201D,
+    U+2013-2014;
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Heading Font";
+  src: local("TimesNewRomanPSMT"), local("Times New Roman");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2018-2019, U+201C-201D,
+    U+2013-2014;
+  font-weight: 700;
+  font-style: normal;
+}
+
+button,
+.button {
+  cursor: pointer;
+
+  &.button--primary {
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: brightness(1.5);
+    }
+  }
+}
+
+body {
+  background-color: var(--background);
+}
+
+.link {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &.link--primary {
+    color: var(--color-primary);
+    &:hover {
+      color: var(--color-primary-hover);
+    }
+    &::after {
+      background-color: var(--color-primary-hover);
+    }
+  }
+
+  &.link--secondary {
+    color: var(--color-text-primary);
+    &:hover {
+      color: var(--color-text-primary);
+    }
+    &::after {
+      background-color: var(--color-text-primary);
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    transition: transform 0.25s ease-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  &::after {
+    transform-origin: bottom right;
+  }
+}
+
+.tag {
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.material-symbols-rounded,
+.material-symbols-outlined {
+  font-size: 20px;
+  color: var(--color-text-primary);
+  font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 20;
+
+  &.size--24 {
+    font-size: 24px;
+    font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 24;
+  }
+}
+
+.divider {
+  border-color: var(--color-divider);
+}
+
+.side-shadow {
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.1),
+    6px 6px 8px 0px rgba(0, 0, 0, 0.09), 13px 13px 11px 0px rgba(0, 0, 0, 0.05),
+    24px 24px 14px 0px rgba(0, 0, 0, 0.01);
+  transition: box-shadow 0.3s ease;
+
+  border: 1px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.05),
+    transparent
+  );
+
+  &:hover {
+    box-shadow: 5px 5px 14px 0px rgba(0, 0, 0, 0.1),
+      18px 18px 26px 0px rgba(0, 0, 0, 0.09),
+      41px 41px 35px 0px rgba(0, 0, 0, 0.05),
+      73px 73px 41px 0px rgba(0, 0, 0, 0.01);
+  }
+}
+
+.react-loading-skeleton {
+  border-radius: 0 !important;
+  height: 100%;
+  line-height: unset !important;
+}
+
+.btn {
+  padding: 0.8em;
+  padding-bottom: 0.65em;
+  border: none;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  font-weight: 500;
+  color: white;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-primary-hover);
+  }
+}

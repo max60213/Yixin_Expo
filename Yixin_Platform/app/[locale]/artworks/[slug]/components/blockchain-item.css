@@ -1,0 +1,23 @@
+.blockchain-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  &__label {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.437;
+    color: var(--color-text-secondary);
+  }
+
+  &__value {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.437;
+    width: fit-content;
+    color: var(--color-primary);
+  }
+}
+

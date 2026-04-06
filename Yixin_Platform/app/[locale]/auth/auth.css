@@ -1,0 +1,71 @@
+body {
+  &:has(.auth-page) {
+    margin: 0;
+    padding: 0;
+
+    .app-bar,
+    .navigation-container {
+      opacity: 0;
+      height: 0;
+      padding: 0;
+    }
+  }
+}
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  padding: max(4rem, 10vh) 30px;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+.google-signin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-noto-sans-tc);
+  gap: 12px;
+  padding: 10px;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 1px solid #ccc;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    shape-rendering: optimizeQuality;
+    image-rendering: optimizeQuality;
+  }
+
+  &:hover {
+    background-color: hsl(0, 0%, 95%);
+  }
+}

@@ -1,0 +1,121 @@
+@import "../../breakpoints.css";
+
+:root {
+  --nav-height: 84px;
+}
+
+%center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  margin-top: var(--nav-height);
+
+  @mixin md-down {
+    margin-top: 0;
+  }
+}
+
+.app-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+  height: 84px;
+
+  @mixin md-down {
+    position: relative;
+    top: 0;
+  }
+
+  @mixin md-down {
+    height: auto;
+    padding: 12px 0;
+  }
+
+  @extend %center;
+
+  &__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--grid-padding);
+
+    @mixin sm-down {
+      padding: 0 12px;
+    }
+  }
+
+  &__left {
+    @mixin md-up {
+      a {
+        height: 44px;
+        aspect-ratio: 1;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        position: relative;
+
+        &::before {
+          content: "";
+          background-color: var(--color-text-primary);
+          width: 100%;
+          aspect-ratio: 1;
+          position: absolute;
+          border-radius: 50%;
+          top: 0;
+          left: 0;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover {
+          &::before {
+            transform: scale(1.3);
+          }
+        }
+
+        svg {
+          fill: hsl(0, 0%, 100%);
+          filter: drop-shadow(0 0 2px hsla(0, 0%, 0%, 0.2));
+        }
+      }
+    }
+
+
+    @mixin md-down {
+      a {
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 44px;
+
+        svg {
+          transform: scale(0.9);
+          fill: hsl(0, 0%, 0%)
+        }
+      }
+    }
+  }
+
+  &__back-button {
+    /* 保留按鈕樣式，如果需要可以添加 */
+  }
+
+  &__title {
+    /* 保留標題樣式，如果需要可以添加 */
+  }
+
+  &__right {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

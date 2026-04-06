@@ -1,0 +1,63 @@
+@import "../breakpoints.css";
+
+:root {
+  --grid-padding: 20px;
+  --grid-gap: 12px;
+  --grid-col: calc((100vw - var(--grid-padding) * 2 - var(--grid-gap) * 3) / 4);
+
+  @mixin sm-up {
+    --grid-padding: 28px;
+    --grid-gap: 20px;
+  }
+
+  @mixin md-up {
+    --grid-padding: 34px;
+    --grid-gap: 20px;
+    --grid-col: calc((100vw - var(--grid-padding) * 2 - var(--grid-gap) * 11) / 12);
+  }
+
+  @mixin lg-up {
+    --grid-padding: 54px;
+    --grid-gap: 24px;
+  }
+
+  @mixin xl-up {
+    --grid-padding: 128px;
+    --grid-gap: 34px;
+  }
+
+  @mixin 2xl-up {
+    --grid-gap: 34px;
+    --grid-col: 96px;
+    --grid-padding: calc((100vw - var(--grid-col) * 12 - var(--grid-gap) * 11) / 2);
+  }
+}
+
+.grid-system {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 var(--grid-padding);
+  gap: var(--grid-gap);
+
+  @mixin md-up {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+
+  .column {
+    background-color: red;
+    opacity: 0.2;
+    height: 100%;
+  }
+
+  .box {
+    background-color: blue;
+    opacity: 0.2;
+    width: var(--grid-col);
+    height: var(--grid-col);
+    left: var(--grid-padding);
+    top: 500px;
+  }
+}
+

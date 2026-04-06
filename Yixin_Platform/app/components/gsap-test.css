@@ -1,0 +1,10 @@
+.gsap-test {
+  position: fixed;
+  top: 100px;
+  z-index: 1000;
+  .box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+  }
+}

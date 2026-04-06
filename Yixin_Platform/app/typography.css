@@ -1,0 +1,67 @@
+@import "./breakpoints.css";
+
+h1,
+.h1 {
+  font-size: 36px;
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 600;
+  text-wrap: pretty;
+
+  @mixin xl-down {
+    font-size: 32px;
+  }
+
+  @mixin md-down {
+    font-size: 20px;
+  }
+}
+
+h2,
+.h2 {
+  font-size: 25px;
+  font-weight: 600;
+
+  @mixin md-down {
+    font-size: 18px;
+  }
+}
+
+h3,
+.h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.caption {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+}
+
+.block-renderer,
+.paragraph {
+  * {
+    margin-bottom: 16px;
+  }
+  p:not(.info-card__text) {
+    /* margin: 0 0 1em 0; */
+    line-height: 1.75;
+    letter-spacing: 0.03em;
+    color: var(--color-text-secondary);
+
+    /* &:not(:has(+ p)) {
+      margin-bottom: 0;
+    } */
+  }
+  h1 {
+    font-size: 32px;
+    @mixin md-down {
+      font-size: 24px;
+    }
+  }
+
+  a {
+    color: var(--color-primary);
+  }
+}

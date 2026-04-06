@@ -1,0 +1,39 @@
+@import "../breakpoints.css";
+
+:root {
+  --section-header-margin-bottom: 24px;
+}
+
+.section-header {
+  margin: 0 var(--grid-padding);
+  padding-right: 16px;
+  cursor: pointer;
+  width: fit-content;
+
+  &--no-href {
+    cursor: default;
+    /* margin: 0; */
+  }
+
+  &__icon {
+    color: var(--color-text-secondary);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 0.125em;
+  }
+
+  &:hover & {
+    &__icon {
+      color: var(--color-primary);
+      transform: translateX(8px);
+      font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 20;
+    }
+  }
+
+  &__title {
+    font-size: 25px;
+
+    @mixin md-down {
+      font-size: 21px;
+    }
+  }
+}

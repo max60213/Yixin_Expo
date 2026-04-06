@@ -1,0 +1,85 @@
+.artwork-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__title-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  &__title {
+    font-size: 32px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.87);
+    flex: 1;
+  }
+
+  &__bookmark {
+    font-size: 36px;
+    transform: translateX(6px);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transition-property: font-variation-settings, color;
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 36;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+
+    &.active {
+      font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 36;
+      color: var(--color-primary);
+
+      &:hover {
+        color: var(--color-primary-hover);
+      }
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  &__artist {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 20px;
+
+    &__name {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--color-primary);
+    }
+
+    &__year {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+
+    &__icon {
+      color: #ffc72b;
+      width: 24px;
+      height: 24px;
+      transform: translateY(-2px);
+      font-variation-settings: "FILL" 1, "wght" 200, "GRAD" 0, "opsz" 24;
+    }
+  }
+}

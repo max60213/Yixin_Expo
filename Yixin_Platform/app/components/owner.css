@@ -1,0 +1,27 @@
+.owner {
+  background: white;
+  padding: 12px 24px;
+  position: relative;
+
+  &--current {
+    border: none;
+    &:before {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 100%;
+      background-color: var(--color-primary);
+      left: 0;
+      top: 0;
+    }
+  }
+  &__name {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  &__date {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+  }
+}

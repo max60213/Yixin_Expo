@@ -1,0 +1,33 @@
+{
+  "Navigation": {
+    "home": "首頁",
+    "explore": "探索",
+    "auction": "拍賣",
+    "more": {
+      "title": "更多",
+      "about": "關於",
+      "news": "新聞"
+    },
+    "Profile": "專頁"
+  },
+  "ExplorePage": {
+    "title": "探索"
+  },
+  "AuctionPage": {
+    "title": "拍賣"
+  },
+  "HomePage": {
+    "title": "你好，世界！",
+    "about": "前往關於頁面"
+  },
+  "NewsPage": {
+    "title": "新聞"
+  },
+  "AboutPage": {
+    "title": "關於"
+  },
+  "ArticlePage": {
+    "publishedOn": "發佈於 {date}",
+    "backToNews": "回到新聞"
+  }
+}

@@ -1,0 +1,73 @@
+@import "../../breakpoints.css";
+
+.nav-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-wrap: nowrap;
+  gap: 4px;
+  max-width: 100%;
+  padding: 6px 16px;
+  border-radius: 100px;
+  cursor: pointer;
+  height: var(--tab-height);
+  transition: var(--tab-transition);
+  transition-property: background-color, box-shadow, color;
+  z-index: 1;
+
+  &__label {
+    font-family: var(--font-noto-sans-tc);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-text-primary);
+    transition: var(--tab-transition);
+  }
+
+  .material-symbols-rounded {
+    font-size: 24px;
+    font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 24;
+    flex-shrink: 0;
+    transition: var(--tab-transition);
+    transition-property: fill, color;
+  }
+
+  @mixin md-down {
+    flex-direction: column;
+    font-size: 10px;
+    gap: 0;
+    padding: 0 20px;
+
+    .material-symbols-rounded {
+      font-size: 32px;
+      font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 32;
+      aspect-ratio: 1/1;
+      margin-bottom: -2px;
+    }
+
+    &__label {
+      font-size: 10px;
+    }
+  }
+
+  &--active {
+    .nav-item__label,
+    .material-symbols-rounded {
+      color: var(--color-primary);
+    }
+
+    &:hover {
+      .nav-item__label,
+      .material-symbols-rounded {
+        color: var(--color-primary-hover);
+      }
+
+      & ~ .navigation__pad {
+        box-shadow: 0 0 0 7px var(--tab-active), 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  &:hover:not(&--active) {
+    background-color: var(--tab-hover);
+  }
+}

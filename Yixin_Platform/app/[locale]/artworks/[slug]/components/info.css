@@ -1,0 +1,120 @@
+@import '../../../../breakpoints.css';
+
+/* 作品資訊區域 */
+.artwork-page__info {
+  width: calc(var(--grid-col) * 4 + var(--grid-gap) * 3);
+  margin-right: calc(var(--grid-col) / 2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__description {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.75;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  &__activities {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__items {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+
+      &__more {
+        position: absolute;
+        bottom: 0;
+        padding: 6px 16px 5px;
+        background: hsl(0, 0%, 88%);
+        left: 50%;
+        border-radius: 100px;
+        transform: translate(-50%, 50%);
+        transition: filter 0.3s ease;
+
+        &:hover {
+          filter: brightness(1.05);
+        }
+      }
+    }
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 16px 6px;
+      background: #E6E6E6;
+      color: rgba(0, 0, 0, 0.87);
+      border-radius: 120px;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.437;
+      width: fit-content;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+
+    &__price {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-top: 16px;
+
+      &__value {
+        font-family: 'Times New Roman', serif;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1.15;
+        color: rgba(0, 0, 0, 0.8);
+        text-align: right;
+      }
+
+      &__card {
+        width: 100%;
+        height: 48px;
+        background: var(--color-primary);
+        box-shadow:
+          2px 3px 8px 0px rgba(0, 0, 0, 0.05),
+          7px 12px 14px 0px rgba(0, 0, 0, 0.05),
+          16px 27px 19px 0px rgba(0, 0, 0, 0.03),
+          29px 47px 22px 0px rgba(0, 0, 0, 0.01),
+          46px 74px 24px 0px rgba(0, 0, 0, 0);
+      }
+    }
+  }
+}
+
+/* Responsive Design */
+.artwork-page__info {
+  @mixin 2xl-down {
+    margin: 0 calc(var(--grid-col) + var(--grid-gap));
+  }
+
+  @mixin xl-down {
+    width: calc(var(--grid-col) * 5 + var(--grid-gap) * 4);
+    margin: 0 auto;
+  }
+
+  @mixin md-down {
+    width: 100%;
+    margin: 0;
+    padding: 0 var(--grid-padding);
+  }
+}

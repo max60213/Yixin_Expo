@@ -1,0 +1,32 @@
+.final-anchor {
+
+  /* 說明文字 */
+  &__description {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* 連結區域 */
+  &__link-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  /* FAQ 區域 */
+  &__faq {
+    &__item {
+      display: flex;
+      gap: 4px;
+    }
+  }
+}
+

@@ -1,0 +1,204 @@
+/* AccountMenu.tsx 樣式 - BEM + PostCSS Nested */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.account-menu {
+  position: relative;
+  height: 42px;
+  aspect-ratio: 1/1;
+
+  &__login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    cursor: pointer;
+    gap: 6px;
+    padding: 0 18px;
+    /* padding-right: 18px; */
+    border-radius: 100px;
+    background-color: hsla(0, 0%, 90%, 0.8);
+    backdrop-filter: blur(20px);
+    transition: background-color 0.3s ease;
+
+    .material-symbols-rounded {
+      font-size: 24px;
+      color: white;
+    }
+
+    &__text {
+      font-family: var(--font-noto-sans-tc);
+      color: var(--color-text-primary);
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    &:hover {
+      background-color: hsla(0, 0%, 80%, 0.8);
+    }
+  }
+
+  /* 載入中狀態 */
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  &__loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  /* 觸發按鈕（已登入狀態） */
+  &__trigger {
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-divider);
+    border-radius: 50%;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  /* 使用者頭像 */
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+
+    &-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+
+      & .material-symbols-rounded {
+        font-size: 28px;
+      }
+    }
+  }
+
+  /* 下拉選單 */
+  &__dropdown {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px;
+    border-radius: 20px;
+    background: hsla(0, 0%, 90%, 0.8);
+    backdrop-filter: blur(20px);
+    min-width: 240px;
+    border: 1px solid var(--color-divider);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: -1;
+
+    &.active {
+      pointer-events: auto;
+    }
+  }
+
+  &__user {
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 16px;
+
+    &__name {
+      font-size: 20px;
+      color: var(--color-text-primary);
+      font-family: var(--font-noto-sans-tc);
+      font-weight: 600;
+    }
+
+    &__email {
+      font-family: var(--font-noto-sans-tc);
+      color: var(--color-text-secondary);
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+    &:not(:last-child) {
+      margin-bottom: 6px;
+    }
+
+    &>* {
+      border-radius: 0px !important;
+
+      &:first-child {
+        border-top-left-radius: 20px !important;
+        border-top-right-radius: 20px !important;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+      }
+    }
+  }
+
+  &__items-wrapper:hover &__item:not(:hover) {
+    background: hsla(0, 0%, 100%, 0.6);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: hsla(0, 0%, 100%, 0.8);
+    width: 100%;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border-radius: 100px;
+
+    .material-symbols-outlined {
+      color: var(--color-text-secondary);
+      font-size: 22px;
+      font-variation-settings: "FILL" 1;
+    }
+
+    span {
+      /* transition: color 0.3s ease; */
+    }
+
+    span:last-child {
+      font-family: var(--font-noto-sans-tc);
+      color: var(--color-text-secondary);
+      font-size: 15px;
+    }
+
+    &:hover {
+      background-color: hsla(0, 0%, 100%, 1);
+      transition: background-color 0s;
+
+      span {
+        color: var(--color-text-primary);
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import "../breakpoints.css";
+
+.collection-header {
+  &__title {
+    line-height: 1;
+
+    @mixin md-down {
+      font-size: 28px;
+    }
+  }
+}

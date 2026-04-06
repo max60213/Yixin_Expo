@@ -1,0 +1,27 @@
+@import "../../breakpoints.css";
+
+/**
+ * PublisherBadge 樣式
+ * 
+ * 發布者/畫廊標籤的共用樣式
+ * 單位使用 em（除了 font-size）
+ */
+
+.publisher-badge {
+  padding: 0.2em 0.5em 0.1em;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  font-size: 15px;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  transition-property: background-color, color;
+
+  @mixin md-down {
+    font-size: 12px;
+  }
+
+  &:hover {
+    background-color: var(--color-primary);
+    color: white;
+  }
+}

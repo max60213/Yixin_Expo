@@ -1,0 +1,79 @@
+@import "../../breakpoints.css";
+
+.collection {
+  margin: 0 var(--grid-padding);
+
+  .artworks-masonry {
+    margin: 0 !important;
+  }
+
+  &__header {
+    &__title {
+      line-height: 1;
+    }
+  }
+
+  &__content {
+    display: grid;
+    gap: var(--grid-gap);
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 40px;
+
+    @mixin 2xl-down {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @mixin xl-down {
+      row-gap: 32px;
+    }
+
+    @mixin lg-down {
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    }
+
+    @mixin md-down {
+      row-gap: 20px;
+    }
+
+    @mixin sm-down {
+      grid-template-columns: 1fr;
+      gap: var(--grid-padding)
+    }
+
+    &:has(.card--material, .card--artist, .card--gallery) {
+      .card {
+
+        &--artist,
+        &--gallery {
+          .card__image {
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 200px;
+
+            @mixin xl-down {
+              max-width: 180px;
+            }
+          }
+        }
+      }
+
+      grid-template-columns: repeat(6, 1fr);
+
+      @mixin xl-down {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      @mixin lg-down {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      @mixin md-down {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @mixin sm-down {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}
