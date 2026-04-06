@@ -1,16 +1,22 @@
 import { Tabs } from 'expo-router';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { View, Text } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { View } from 'react-native';
 
 function TabIcon({ name, focused }: { name: string; focused: boolean }) {
+  const iconMap: Record<string, keyof typeof MaterialIcons.glyphMap> = {
+    'Home': 'home',
+    'Explore': 'explore',
+    'Search': 'search',
+    'Profile': 'person',
+  };
+
   return (
      <View style={{ alignItems: 'center' }}>
-        <Text style={{ fontSize: 24, color: focused ? '#007AFF' : '#999', marginBottom: 4 }}>
-          {name}
-        </Text>
-        <Text style={{ fontSize: 10, color: focused ? '#007AFF' : '#999' }}>
-          {name}
-        </Text>
+        <MaterialIcons 
+          name={iconMap[name] || 'home'} 
+          size={24} 
+          color={focused ? '#007AFF' : '#999'} 
+        />
       </View>
     );
 }
@@ -18,10 +24,10 @@ function TabIcon({ name, focused }: { name: string; focused: boolean }) {
 export default function TabLayout() {
   return (
       <Tabs screenOptions={{ headerShown: false }}>
-         <Tabs.Screen name="index" options={{ title: 'Home' }} />
-         <Tabs.Screen name="explore" options={{ title: 'Explore' }} />
-         <Tabs.Screen name="search" options={{ title: 'Search' }} />
-         <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
+         <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: ({ focused }) => <TabIcon name="Home" focused={focused} /> }} />
+         <Tabs.Screen name="explore" options={{ title: 'Explore', tabBarIcon: ({ focused }) => <TabIcon name="Explore" focused={focused} /> }} />
+         <Tabs.Screen name="search" options={{ title: 'Search', tabBarIcon: ({ focused }) => <TabIcon name="Search" focused={focused} /> }} />
+         <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon: ({ focused }) => <TabIcon name="Profile" focused={focused} /> }} />
         </Tabs>
       );
 }
